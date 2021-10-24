@@ -1,8 +1,8 @@
 import { Reducer } from "redux";
-import { PersonType } from "../sagas";
+import { Person } from "../sagas/people/interfaces";
 
 type State = {
-  people: PersonType[];
+  people: Person[];
 };
 
 const initialState: State = {
@@ -11,7 +11,7 @@ const initialState: State = {
 
 export type ActionSetPeople = {
   type: "SET_PEOPLE";
-  payload: PersonType[];
+  payload: Person[];
 };
 
 type Action =
