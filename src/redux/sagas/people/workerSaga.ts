@@ -1,5 +1,5 @@
 import { put, call, PutEffect, CallEffect } from "redux-saga/effects";
-import { getPeopleService } from "../../../services/getPeopleService";
+import { SWAPIService } from "../../../services/SWAPIService";
 import { ActionSetPeople } from "../../reducers";
 import { Person } from "./interfaces";
 
@@ -8,7 +8,7 @@ export function* workerSaga(): Generator<
   void,
   Person[]
 > {
-  const data = yield call(getPeopleService);
+  const payload = yield call(SWAPIService.getPerson);
 
-  yield put<ActionSetPeople>({ type: "SET_PEOPLE", payload: data });
+  yield put<ActionSetPeople>({ type: "SET_PEOPLE", payload });
 }
