@@ -1,8 +1,9 @@
 import { fork } from "redux-saga/effects";
-import { loadPeople } from "../people/loadPeople";
-import { loadPlanets } from "../planets/loadPlanets";
+import { workeLoadPeopleSaga } from "../people/workeLoadPeopleSaga";
+import { workerLoadPlanetsSaga } from "../planets/workerLoadPlanetsSaga";
 
 export function* workerSaga() {
-  yield fork(loadPeople);
-  yield fork(loadPlanets);
+  yield fork(workeLoadPeopleSaga);
+
+  yield fork(workerLoadPlanetsSaga);
 }
