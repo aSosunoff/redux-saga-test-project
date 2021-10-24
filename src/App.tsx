@@ -1,10 +1,16 @@
 import React from "react";
+import { useDispatchLoadAllData } from "./hooks/use-dispatch-load-all-data";
 import { useDispatchLoadPeople } from "./hooks/use-dispatch-load-people";
+import { useDispatchLoadPlanets } from "./hooks/use-dispatch-load-planets";
 
 export const App: React.FC = () => {
   /* const store = useSelector((store) => store); */
 
   const { dispatchLoadPeple } = useDispatchLoadPeople();
+
+  const { dispatchLoadPlanets } = useDispatchLoadPlanets();
+
+  const { dispatchLoadAllData } = useDispatchLoadAllData();
 
   return (
     <div>
@@ -13,7 +19,23 @@ export const App: React.FC = () => {
           dispatchLoadPeple();
         }}
       >
-        Click
+        Load People
+      </button>
+
+      <button
+        onClick={() => {
+          dispatchLoadPlanets();
+        }}
+      >
+        Load Planets
+      </button>
+
+      <button
+        onClick={() => {
+          dispatchLoadAllData();
+        }}
+      >
+        Load All Planets
       </button>
     </div>
   );
