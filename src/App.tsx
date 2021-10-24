@@ -1,31 +1,16 @@
-import React, { useCallback } from "react";
-import { useDispatch, useSelector } from "react-redux";
-import { Action, Dispatch } from "redux";
-
-export type dispatchType = "LOAD_PEOPLE";
-
-const useDispatchClick = () => {
-  const dispatch = useDispatch<Dispatch<Action<dispatchType>>>();
-
-  const dispatchClick = useCallback(() => {
-    dispatch({ type: "LOAD_PEOPLE" });
-  }, [dispatch]);
-
-  return { dispatchClick };
-};
+import React from "react";
+import { useDispatchLoadPeople } from "./hooks/use-dispatch-load-people";
 
 export const App: React.FC = () => {
-  const store = useSelector((store) => store);
+  /* const store = useSelector((store) => store); */
 
-  const { dispatchClick } = useDispatchClick();
-
-  console.log(store);
+  const { dispatchLoadPeple } = useDispatchLoadPeople();
 
   return (
     <div>
       <button
         onClick={() => {
-          dispatchClick();
+          dispatchLoadPeple();
         }}
       >
         Click
