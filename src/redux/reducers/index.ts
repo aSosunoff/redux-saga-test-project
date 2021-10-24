@@ -1,12 +1,15 @@
 import { Reducer } from "redux";
-import { Person } from "../sagas/people/interfaces";
+import { Person } from "../../interfaces/person";
+import { Planet } from "../../interfaces/planet";
 
 type State = {
   people: Person[];
+  planets: Planet[];
 };
 
 const initialState: State = {
   people: [],
+  planets: [],
 };
 
 export type ActionSetPeople = {
@@ -14,10 +17,16 @@ export type ActionSetPeople = {
   payload: Person[];
 };
 
+export type ActionSetPlanet = {
+  type: "SET_PLANETS";
+  payload: Planet[];
+};
+
 type Action =
   | ActionSetPeople
+  | ActionSetPlanet
   | {
-      type: Pick<any, ActionSetPeople["type"]>;
+      type: Pick<any, ActionSetPeople["type"] | ActionSetPlanet["type"]>;
     };
 
 export const reducer: Reducer<State, Action> = (
@@ -29,6 +38,13 @@ export const reducer: Reducer<State, Action> = (
       return {
         ...state,
         people: action.payload,
+      };
+    }
+
+    case "SET_PLANETS": {
+      return {
+        ...state,
+        planets: action.payload,
       };
     }
 
