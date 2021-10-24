@@ -1,12 +1,29 @@
-import { fork } from "redux-saga/effects";
+import { spawn, call, all } from "redux-saga/effects";
 import { watchLoadAllData } from "./allData/watchLoadAllData";
 import { watchLoadPeopleSaga } from "./people/watchLoadPeopleSaga";
 import { watchLoadPlanetsSaga } from "./planets/watchLoadPlanetsSaga";
 
 export function* rootSaga() {
-  yield fork(watchLoadPeopleSaga);
+  /* yield spawn(watchLoadPeopleSaga);
 
-  yield fork(watchLoadPlanetsSaga);
+  yield spawn(watchLoadPlanetsSaga);
 
-  yield fork(watchLoadAllData);
+  yield spawn(watchLoadAllData); */
+
+  const sagas = [watchLoadPeopleSaga, watchLoadPlanetsSaga, watchLoadAllData];
+
+  const retrySagas = sagas.map((saga) =>
+    spawn(function* () {
+      while (true) {
+        try {
+          yield call(saga);
+          break;
+        } catch (error: any) {
+          console.log(error);
+        }
+      }
+    })
+  );
+
+  yield all(retrySagas);
 }
