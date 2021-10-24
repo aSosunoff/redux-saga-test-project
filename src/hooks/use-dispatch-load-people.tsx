@@ -2,9 +2,9 @@ import { useCallback } from "react";
 import { useDispatch } from "react-redux";
 import { Action, Dispatch } from "redux";
 
-export type dispatchType = "LOAD_PEOPLE";
+export const type = "LOAD_PEOPLE";
 
-export const type: dispatchType = "LOAD_PEOPLE";
+export type dispatchType = typeof type;
 
 export const useDispatchLoadPeople = () => {
   const dispatch = useDispatch<Dispatch<Action<dispatchType>>>();
