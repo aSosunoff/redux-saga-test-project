@@ -1,7 +1,7 @@
 import { put, call, PutEffect, CallEffect } from "redux-saga/effects";
 import { Planet } from "../../../interfaces/planet";
 import { SWAPIService } from "../../../services/SWAPIService";
-import { ActionSetPlanet } from "../../reducers";
+import { ActionSetPlanet } from "../../reducers/appReducer";
 
 export function* workerLoadPlanetsSaga(): Generator<
   CallEffect<Planet[]> | PutEffect<ActionSetPlanet>,
