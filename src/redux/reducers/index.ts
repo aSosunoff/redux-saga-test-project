@@ -12,24 +12,20 @@ const initialState: State = {
   planets: [],
 };
 
-export type ActionSetPeople = {
-  type: "SET_PEOPLE";
-  payload: Person[];
+/*  */
+type Action<T extends string> = {
+  type: T;
 };
 
-export type ActionSetPlanet = {
-  type: "SET_PLANETS";
-  payload: Planet[];
+type ActionPayload<T extends string, P extends any> = Action<T> & {
+  payload: P;
 };
+/*  */
 
-type Action =
-  | ActionSetPeople
-  | ActionSetPlanet
-  | {
-      type: Pick<any, ActionSetPeople["type"] | ActionSetPlanet["type"]>;
-    };
+export type ActionSetPeople = ActionPayload<"SET_PEOPLE", Person[]>;
+export type ActionSetPlanet = ActionPayload<"SET_PLANETS", Planet[]>;
 
-export const reducer: Reducer<State, Action> = (
+export const reducer: Reducer<State, ActionSetPeople | ActionSetPlanet> = (
   state = initialState,
   action
 ) => {
