@@ -18,13 +18,13 @@ export type ActionSetStarship = CreateAction<ActionApp, "SET_STARSHIP">;
 type State = {
   people: Person[];
   planets: Planet[];
-  starship: Starship[];
+  starships: Starship[];
 };
 
 const initialState: State = {
   people: [],
   planets: [],
-  starship: [],
+  starships: [],
 };
 
 const handlers: Handler<State, ActionApp> = {
@@ -35,7 +35,7 @@ const handlers: Handler<State, ActionApp> = {
   }),
   SET_STARSHIP: (state, action) => ({
     ...state,
-    starship: action.payload,
+    starships: action.payload,
   }),
   DEFAULT: (state) => state,
 };
