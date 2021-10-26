@@ -1,5 +1,7 @@
 import { spawn, call, all } from "redux-saga/effects";
 import { watchLoadAllData } from "./allData/watchLoadAllData";
+import { pageStarshipLoadSaga } from "./pageStarshipLoadSaga/pageStarshipLoadSaga";
+import { watchStarshipLoadSaga } from "./pageStarshipLoadSaga/watchStarshipLoadSaga";
 import { watchLoadPeopleSaga } from "./people/watchLoadPeopleSaga";
 import { watchLoadPlanetsSaga } from "./planets/watchLoadPlanetsSaga";
 
@@ -10,7 +12,13 @@ export function* rootSaga() {
 
   yield spawn(watchLoadAllData); */
 
-  const sagas = [watchLoadPeopleSaga, watchLoadPlanetsSaga, watchLoadAllData];
+  const sagas = [
+    watchLoadPeopleSaga,
+    watchLoadPlanetsSaga,
+    watchLoadAllData,
+    pageStarshipLoadSaga,
+    watchStarshipLoadSaga,
+  ];
 
   const retrySagas = sagas.map((saga) =>
     spawn(function* () {
