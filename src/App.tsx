@@ -1,17 +1,10 @@
-import React, { useEffect } from "react";
-import { useSelector } from "react-redux";
+import React from "react";
 import { Link } from "react-router-dom";
 import { useDispatchLoadAllData } from "./hooks/use-dispatch-load-all-data";
 import { useDispatchLoadPeople } from "./hooks/use-dispatch-load-people";
 import { useDispatchLoadPlanets } from "./hooks/use-dispatch-load-planets";
 
 export const App: React.FC = () => {
-  const store = useSelector((store) => store);
-
-  useEffect(() => {
-    console.log(store);
-  }, [store]);
-
   const { dispatchLoadPeple } = useDispatchLoadPeople();
 
   const { dispatchLoadPlanets } = useDispatchLoadPlanets();
@@ -46,7 +39,12 @@ export const App: React.FC = () => {
         </button>
       </div>
 
-      <Link to="/Blog">Blog</Link>
+      <div>
+        <Link to="/starships">Starships</Link>
+      </div>
+      <div>
+        <Link to="/people">People</Link>
+      </div>
     </>
   );
 };
