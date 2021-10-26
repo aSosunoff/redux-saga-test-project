@@ -8,8 +8,9 @@ import { createBrowserHistory } from "history";
 
 import { App } from "./app";
 import { configureStore } from "./redux";
-import { Blog } from "./feature/Blog";
+import { People } from "./feature/People";
 import { NotFound } from "./feature/NotFound";
+import { Starship } from "./feature/Starship";
 
 export const history = createBrowserHistory();
 
@@ -23,8 +24,12 @@ ReactDOM.render(
           <App />
         </Route>
 
-        <Route path="/blog">
-          <Blog />
+        <Route path="/people">
+          <People />
+        </Route>
+
+        <Route path="/starships">
+          <Starship />
         </Route>
 
         <Route path="*">
