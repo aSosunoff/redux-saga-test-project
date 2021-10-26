@@ -1,41 +1,46 @@
 import { Reducer } from "redux";
+
 import { Person } from "../../interfaces/person";
 import { Planet } from "../../interfaces/planet";
-import { ActionPayload } from "./helpers";
+import { Starship } from "../../interfaces/starship";
+import { CreateReducer, CreateAction, Handler } from "./helpers";
 
-export type ActionSetPeople = ActionPayload<"SET_PEOPLE", Person[]>;
-export type ActionSetPlanet = ActionPayload<"SET_PLANETS", Planet[]>;
+type ActionApp = {
+  SET_PEOPLE: { payload: Person[] };
+  SET_PLANETS: { payload: Planet[] };
+  SET_STARSHIP: { payload: Starship[] };
+};
+
+export type ActionSetPeople = CreateAction<ActionApp, "SET_PEOPLE">;
+export type ActionSetPlanet = CreateAction<ActionApp, "SET_PLANETS">;
+export type ActionSetStarship = CreateAction<ActionApp, "SET_STARSHIP">;
 
 type State = {
   people: Person[];
   planets: Planet[];
+  starship: Starship[];
 };
 
 const initialState: State = {
   people: [],
   planets: [],
+  starship: [],
 };
 
-export const appReducer: Reducer<State, ActionSetPeople | ActionSetPlanet> = (
-  state = initialState,
-  action
-) => {
-  switch (action.type) {
-    case "SET_PEOPLE": {
-      return {
-        ...state,
-        people: action.payload,
-      };
-    }
-
-    case "SET_PLANETS": {
-      return {
-        ...state,
-        planets: action.payload,
-      };
-    }
-
-    default:
-      return state;
-  }
+const handlers: Handler<State, ActionApp> = {
+  SET_PEOPLE: (state, action) => ({ ...state, people: action.payload }),
+  SET_PLANETS: (state, action) => ({
+    ...state,
+    planets: action.payload,
+  }),
+  SET_STARSHIP: (state, action) => ({
+    ...state,
+    starship: action.payload,
+  }),
+  DEFAULT: (state) => state,
 };
+
+export const appReducer: Reducer<
+  State,
+  ActionSetPeople | ActionSetPlanet | ActionSetStarship
+> = (state = initialState, action) => CreateReducer(handlers, state, action);
