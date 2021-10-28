@@ -20,6 +20,14 @@ export const People: React.FC = () => {
     <>
       <div>People</div>
 
+      <button
+        onClick={() => {
+          dispatchLoadPeple();
+        }}
+      >
+        Load People
+      </button>
+
       <div>
         <Link to="/">Main</Link>
       </div>
