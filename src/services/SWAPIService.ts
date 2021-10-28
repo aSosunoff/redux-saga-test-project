@@ -1,8 +1,8 @@
 import { Person } from "../interfaces/person";
 import { Planet } from "../interfaces/planet";
 
-const getData = async <Result>(type: string) => {
-  const request = await fetch(`https://swapi.dev/api/${type}/`);
+const getData = async <Result>(type: string, init?: RequestInit) => {
+  const request = await fetch(`https://swapi.dev/api/${type}/`, init);
 
   const data = await request.json();
 
@@ -10,18 +10,18 @@ const getData = async <Result>(type: string) => {
 };
 
 export class SWAPIService {
-  static getPersons = async () => {
+  static getPersons = async (init?: RequestInit) => {
     const { results } = await getData<{
       results: Person[];
-    }>("people");
+    }>("people", init);
 
     return results;
   };
 
-  static getPlanets = async () => {
+  static getPlanets = async (init?: RequestInit) => {
     const { results } = await getData<{
       results: Planet[];
-    }>("planets");
+    }>("planets", init);
 
     return results;
   };
