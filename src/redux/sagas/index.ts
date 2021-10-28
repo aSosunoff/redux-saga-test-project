@@ -14,8 +14,11 @@ export function* rootSaga() {
 
   const sagas = [
     watchLoadPeopleSaga,
+
     watchLoadPlanetsSaga,
+
     watchLoadAllData,
+
     pageStarshipLoadSaga,
     watchStarshipLoadSaga,
   ];
