@@ -1,8 +1,7 @@
-import { takeEvery } from "redux-saga/effects";
-
 import { dispatchType, type } from "../../../hooks/use-dispatch-load-people";
+import { takeLatestAbort } from "../effectHelper/takeLatestAbort";
 import { workeLoadPeopleSaga } from "./workeLoadPeopleSaga";
 
 export function* watchLoadPeopleSaga() {
-  yield takeEvery<dispatchType>(type, workeLoadPeopleSaga);
+  yield takeLatestAbort<dispatchType>(type, workeLoadPeopleSaga);
 }
