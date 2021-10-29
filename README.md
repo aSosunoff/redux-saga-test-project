@@ -1,1 +1,1 @@
-# Star Wars People
+# Redux Saga Test Project
